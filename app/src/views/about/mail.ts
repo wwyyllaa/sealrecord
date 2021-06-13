@@ -1,13 +1,15 @@
 var nodemailer = require('nodemailer')
 var smtpTransport = require('nodemailer-smtp-transport')
 var moment = require('moment')
+import { mkBlankFile } from './utils'
 import path from 'path'
 import fs from 'fs'
 const currentPath = path.resolve('./')
 const configPath = currentPath + '/config.json'
-var config = JSON.parse(fs.readFileSync(configPath).toString())
+mkBlankFile(configPath)
+var config = JSON.parse(fs.readFileSync(configPath).toString() || '{}')
 console.log(config)
-const info = config['邮件推送功能']
+const info = config['邮件推送功能'] || {}
 console.log(info)
 
 // 开启一个 SMTP 连接池

@@ -84,7 +84,7 @@ setInterval(() => {
   const filePath = currentPath + '/logs/日报表' + moment().format('YYYY-MM-DD') + '.xlsx'
   if (moment().hour() == 23 && isMailOn) {
     const currentDate: string = moment().format(DATE_FORMAT)
-    if (dateList.indexOf(currentDate) === -1) {
+    if (dateList.indexOf(currentDate) === -1 && fs.existsSync(filePath)) {
       dateList.push(currentDate)
       sendMessage(fileName, filePath)
     }
@@ -92,9 +92,6 @@ setInterval(() => {
 }, 600000)
 
 const FormSizeDemo = () => {
-  const onFormLayoutChange = (aa: any) => {
-    console.log(aa)
-  }
   const tailFormItemLayout = {
     wrapperCol: {
       xs: {
